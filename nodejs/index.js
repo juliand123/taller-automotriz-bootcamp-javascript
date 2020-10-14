@@ -5,6 +5,11 @@ const { type } = require('os');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 
+let recursos = {
+    vehiculos: [{ tipoVehiculo: 'Sedan', marca: 'Honda', linea: 'Civic', tipoPropietario: 'Renting' },
+    { tipoVehiculo: 'Hatchback', marca: 'Nissan', linea: 'March', tipoPropietario: 'Renting' },
+    { tipoVehiculo: 'Sedan', marca: 'Honda', linea: 'Integra', tipoPropietario: 'Propio' }]
+}
 
 const server = http.createServer((req, res) => {
     //1. obtener url desde el objeto request 
@@ -41,23 +46,26 @@ const server = http.createServer((req, res) => {
             headers,
             payload: buffer
         };
+
+        console.log({ data })
         //3.6 elegir el manejador dependiendo de la ruta y asignarle la funcion que el enrutador tiene
         let handler;
-        if(rutaLimpia &&enrutador[rutaLimpia]){
+        if (rutaLimpia && enrutador[rutaLimpia]) {
             handler = enrutador[rutaLimpia];
         }
-        else{
+        else {
             handler = enrutador.noEncontrado;
         }
         //4. ejecutar handler {manejador}  para enviar la respuesta
-        if(typeof handler ==='function'){
-            handler(data, (statusCode = 200, mensaje) =>{
+        if (typeof handler === 'function') {
+            handler(data, (statusCode = 200, mensaje) => {
                 const respuesta = JSON.stringify(mensaje);
+                res.setHeader("Content-Type", "application/json");
                 res.writeHead(statusCode);
                 //linea donde realmente ya estamos respondiendo a la aplicacion cliente
                 res.end(respuesta);
 
-            } )
+            })
         }
 
     });
@@ -68,8 +76,8 @@ const enrutador = {
     ruta: (data, callback) => {
         callback(200, { mensaje: 'esta es /ruta' });
     },
-    usuarios: (data, callback) => {
-        callback(200, [{ nombre: 'usuario 1' }, { nombre: 'usuario 2' } ]);
+    vehiculos: (data, callback) => {
+        callback(200, recursos.vehiculos);
     },
     noEncontrado: (data, callback) => {
         callback(404, { mensaje: 'no encontrado' });
