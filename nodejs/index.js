@@ -38,6 +38,10 @@ const server = http.createServer((req, res) => {
     //3.4.2 terminar de acumular datos y decirle al decoder que finalice
     req.on('end', () => {
         buffer += decoder.end();
+
+        if (headers["content-type"] === 'application/json'){
+            buffer = JSON.parse(buffer);
+        }
         //3.5 ordenar la data del request
         const data = {
             ruta: rutaLimpia,
@@ -46,12 +50,12 @@ const server = http.createServer((req, res) => {
             headers,
             payload: buffer
         };
-
         console.log({ data })
         //3.6 elegir el manejador dependiendo de la ruta y asignarle la funcion que el enrutador tiene
         let handler;
-        if (rutaLimpia && enrutador[rutaLimpia]) {
-            handler = enrutador[rutaLimpia];
+        if (rutaLimpia && enrutador[rutaLimpia] && enrutador[rutaLimpia][metodo]) {
+            handler = enrutador[rutaLimpia][metodo];
+            
         }
         else {
             handler = enrutador.noEncontrado;
@@ -67,7 +71,6 @@ const server = http.createServer((req, res) => {
 
             })
         }
-
     });
 
 });
@@ -76,8 +79,14 @@ const enrutador = {
     ruta: (data, callback) => {
         callback(200, { mensaje: 'esta es /ruta' });
     },
-    vehiculos: (data, callback) => {
-        callback(200, recursos.vehiculos);
+    vehiculos:{
+        GET: (data, callback) => {
+            callback(200, recursos.vehiculos);
+        },
+        POST: (data, callback) => {
+            recursos.vehiculos.push(data.payload);
+            callback(201, recursos.vehiculos);
+        }
     },
     noEncontrado: (data, callback) => {
         callback(404, { mensaje: 'no encontrado' });
