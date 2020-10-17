@@ -39,23 +39,31 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
         buffer += decoder.end();
 
-        if (headers["content-type"] === 'application/json'){
+        if (headers["content-type"] === 'application/json') {
             buffer = JSON.parse(buffer);
+        }
+
+        //3.4.3 revisar si tiene subruta en este caso es el indice del array
+        if (rutaLimpia.indexOf('/') >= -1) {
+            var [rutaPrincipal, indice] = rutaLimpia.split('/');
         }
         //3.5 ordenar la data del request
         const data = {
-            ruta: rutaLimpia,
+            indice,
+            ruta: rutaPrincipal,
             query,
             metodo,
             headers,
             payload: buffer
         };
+
         console.log({ data })
         //3.6 elegir el manejador dependiendo de la ruta y asignarle la funcion que el enrutador tiene
         let handler;
-        if (rutaLimpia && enrutador[rutaLimpia] && enrutador[rutaLimpia][metodo]) {
-            handler = enrutador[rutaLimpia][metodo];
-            
+        if (rutaPrincipal &&
+            enrutador[rutaPrincipal] &&
+            enrutador[rutaPrincipal][metodo]) {
+            handler = enrutador[rutaPrincipal][metodo];
         }
         else {
             handler = enrutador.noEncontrado;
@@ -79,8 +87,14 @@ const enrutador = {
     ruta: (data, callback) => {
         callback(200, { mensaje: 'esta es /ruta' });
     },
-    vehiculos:{
+    vehiculos: {
         GET: (data, callback) => {
+            if (data.indice) {
+                if (recursos.vehiculos[data.indice]) {
+                    return callback(200, recursos.vehiculos[data.indice]);
+                }
+                    return callback(404,{ mensaje:`vehiculo con indice ${data.indice} no encontrado`});
+            }
             callback(200, recursos.vehiculos);
         },
         POST: (data, callback) => {
