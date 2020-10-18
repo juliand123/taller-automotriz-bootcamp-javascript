@@ -1,11 +1,8 @@
 console.log('iniciando servidor');
 const http = require("http"); //requiere el paquete http 
 const requestHandler = require("./request-handler");
-const recursos = require("./recursos");
-
-global.recursos = recursos;
-
 const server = http.createServer(requestHandler);
+
 
 server.listen(5000);
 

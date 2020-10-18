@@ -5,5 +5,6 @@ module.exports = {
     { tipoVehiculo: 'Sedan', marca: 'Nissan', linea: 'Almera', tipoPropietario: 'Propio' },
     { tipoVehiculo: 'Sedan', marca: 'Toyota', linea: 'Corolla', tipoPropietario: 'Propio' },
     { tipoVehiculo: 'Sedan', marca: 'Renault', linea: 'Symbol', tipoPropietario: 'Renting' },
-    { tipoVehiculo: 'Camioneta', marca: 'Toyota', linea: 'Prado', tipoPropietario: 'Renting' }]
+    { tipoVehiculo: 'Camioneta', marca: 'Toyota', linea: 'Prado', tipoPropietario: 'Renting' }
+]
 };
