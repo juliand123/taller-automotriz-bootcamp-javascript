@@ -4,8 +4,9 @@ const http = require('http'); //requiere el paquete http
 const { type } = require('os');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
+const enrutador = require('./enrutador');
 
-let recursos = {
+global.recursos = {
     vehiculos: [{ tipoVehiculo: 'Sedan', marca: 'Honda', linea: 'Civic', tipoPropietario: 'Renting' },
     { tipoVehiculo: 'Hatchback', marca: 'Nissan', linea: 'March', tipoPropietario: 'Renting' },
     { tipoVehiculo: 'Sedan', marca: 'Honda', linea: 'Integra', tipoPropietario: 'Propio' }]
@@ -83,30 +84,5 @@ const server = http.createServer((req, res) => {
 
 });
 server.listen(5000);
-const enrutador = {
-    ruta: (data, callback) => {
-        callback(200, { mensaje: 'esta es /ruta' });
-    },
-    vehiculos: {
-        GET: (data, callback) => {
-            if (data.indice) {
-                if (recursos.vehiculos[data.indice]) {
-                    return callback(200, recursos.vehiculos[data.indice]);
-                }
-                    return callback(404,{ mensaje:`vehiculo con indice ${data.indice} no encontrado`});
-            }
-            callback(200, recursos.vehiculos);
-        },
-        POST: (data, callback) => {
-            recursos.vehiculos.push(data.payload);
-            callback(201, recursos.vehiculos);
-        }
-    },
-    noEncontrado: (data, callback) => {
-        callback(404, { mensaje: 'no encontrado' });
-    }
-
-}
-
 
 console.log('el servidor esta escuchando peticiones en http://localhost:5000/');
