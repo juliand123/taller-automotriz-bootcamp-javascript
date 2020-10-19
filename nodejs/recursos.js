@@ -6,5 +6,24 @@ module.exports = {
     { tipoVehiculo: 'Sedan', marca: 'Toyota', linea: 'Corolla', tipoPropietario: 'Propio' },
     { tipoVehiculo: 'Sedan', marca: 'Renault', linea: 'Symbol', tipoPropietario: 'Renting' },
     { tipoVehiculo: 'Camioneta', marca: 'Toyota', linea: 'Prado', tipoPropietario: 'Renting' }
-]
+    ],
+    mecanicos: [
+        { tipoIdentificacion: 'Cedula', identificacion: '32520366', nombre: 'Alberto', apellido: 'Chamorro', pais: 'Colombia' },
+        { tipoIdentificacion: 'Cedula', identificacion: '805653', nombre: 'Juan', apellido: 'Chapeto', pais: 'Colombia' },
+        { tipoIdentificacion: 'Cedula', identificacion: '78459456', nombre: 'Benito', apellido: 'Camelas', pais: 'Colombia' }
+    ],
+    duenos: [
+        { tipoIdentificacion: 'Cedula', identificacion: '123456', nombre: 'Laga', apellido: 'Rapata', pais: 'Colombia' },
+        { tipoIdentificacion: 'Cedula', identificacion: '85479', nombre: 'Chepe', apellido: 'Arias', pais: 'Colombia' },
+        { tipoIdentificacion: 'Cedula', identificacion: '133', nombre: 'Beni', apellido: 'Rascamelas', pais: 'Colombia' }
+    ],
+    consultas: [{
+        vehiculo: 0,
+        mecanicos: 0,
+        fechaCreacion: new Date(),
+        fechaEdicion: new Date(),
+        historia: "",
+        diagnostico: ""
+    }],
+
 };
