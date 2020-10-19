@@ -19,9 +19,10 @@ module.exports = {
     ],
     consultas: [{
         vehiculo: 0,
-        mecanicos: 0,
+        mecanico: 0,
+        encabezado: "encabezado",
         fechaCreacion: new Date(),
-        fechaEdicion: new Date(),
+        fechaEdicion: null,
         historia: "",
         diagnostico: ""
     }],
