@@ -2,7 +2,7 @@ const recursos = require("./recursos");
 const vehiculos = require("./rutas/vehiculos");
 const mecanicos = require("./rutas/mecanicos");
 const duenos = require("./rutas/duenos");
-const consultas = require("./rutas/consultas");
+const diagnosticos = require("./rutas/diagnosticos");
 
 module.exports = {
     ruta: (data, callback) => {
@@ -11,7 +11,7 @@ module.exports = {
     vehiculos: vehiculos(recursos.vehiculos), 
     mecanicos: mecanicos(recursos.mecanicos),
     duenos: duenos(recursos.duenos),
-    consultas: consultas(recursos.consultas),
+    diagnosticos: diagnosticos(recursos.diagnosticos),
 
     noEncontrado: (data, callback) => {
         callback(404, { mensaje: 'no encontrado' });

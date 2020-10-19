@@ -17,7 +17,7 @@ module.exports = {
         { tipoIdentificacion: 'Cedula', identificacion: '85479', nombre: 'Chepe', apellido: 'Arias', pais: 'Colombia' },
         { tipoIdentificacion: 'Cedula', identificacion: '133', nombre: 'Beni', apellido: 'Rascamelas', pais: 'Colombia' }
     ],
-    consultas: [{
+    diagnosticos: [{
         vehiculo: 0,
         mecanico: 0,
         encabezado: "encabezado",
