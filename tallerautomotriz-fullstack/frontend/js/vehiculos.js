@@ -8,29 +8,27 @@ const form = document.getElementById('form');
 const btnGuardar = document.getElementById('btn-guardar');
 
 
-let vehiculos = [
-    {
-        marca: "Honda",
-        linea: "Civic",
-        tipovehiculo: "Sedan",
-        tipopropietario: "Renting"
-    },
-    {
-        marca: "Honda",
-        linea: "Integra",
-        tipovehiculo: "Sedan",
-        tipopropietario: "Renting"
-    }
-];
+let vehiculos = [];
 
-function listarVehiculos() {
-    solicitarVehiculos();
-    let htmlVehiculos = vehiculos.map((vehiculo, index) => `<tr>
+async function listarVehiculos() {
+
+    try {
+        const respuesta = await fetch("http://localhost:5000/vehiculos");
+        const vehiculosDelServer = await respuesta.json();
+       
+       if (Array.isArray(vehiculosDelServer) && vehiculosDelServer.length > 0) {
+           
+            vehiculos = vehiculosDelServer;
+           
+        }
+            const htmlVehiculos = vehiculos
+                .map(
+                    (vehiculo, index) => `<tr>
         <th scope="row">${index}</th>
-        <td>${vehiculo.tipovehiculo}</td>
+        <td>${vehiculo.tipoVehiculo}</td>
         <td>${vehiculo.marca}</td>
         <td>${vehiculo.linea}</td>
-        <td>${vehiculo.tipopropietario}</td>
+        <td>${vehiculo.tipoPropietario}</td>
         <td>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-info editar"><i class="fas fa-edit"></i></button>
@@ -38,9 +36,16 @@ function listarVehiculos() {
             </div> 
     </td>
     </tr>`).join("");
-    listaVehiculos.innerHTML = htmlVehiculos;
-    Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) => botonEditar.onclick = editar(index));
-    Array.from(document.getElementsByClassName('eliminarVehiculo')).forEach((botonEliminar, index) => botonEliminar.onclick = eliminarVehiculo(index));
+            listaVehiculos.innerHTML = htmlVehiculos;
+            Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) => botonEditar.onclick = editar(index));
+            Array.from(document.getElementsByClassName('eliminarVehiculo')).forEach((botonEliminar, index) => botonEliminar.onclick = eliminarVehiculo(index));
+        }
+    catch (error) {
+        throw error;
+
+    }
+
+
 }
 
 function enviarDatos(evento) {
@@ -101,15 +106,6 @@ function eliminarVehiculo(index) {
 
 listarVehiculos();
 
-function solicitarVehiculos() {
-    fetch('http://localhost:5000/vehiculos').then((respuesta) => {
-        if (respuesta.ok) {
-            return respuesta.json();
-        }
-    }).then(vehiculosDelServer => {
-        console.log( {vehiculosDelServer} );
-    });
-}
 
 form.onsubmit = enviarDatos;
 btnGuardar.onclick = enviarDatos;
