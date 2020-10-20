@@ -24,6 +24,7 @@ let vehiculos = [
 ];
 
 function listarVehiculos() {
+    solicitarVehiculos();
     let htmlVehiculos = vehiculos.map((vehiculo, index) => `<tr>
         <th scope="row">${index}</th>
         <td>${vehiculo.tipovehiculo}</td>
@@ -51,16 +52,16 @@ function enviarDatos(evento) {
         tipopropietario: tipopropietario.value
     };
     const accion = btnGuardar.innerHTML;
-   
-    switch(accion){
-        case'Editar':
-        //editar
-        vehiculos[indice.value] = datos;
-        break;
+
+    switch (accion) {
+        case 'Editar':
+            //editar
+            vehiculos[indice.value] = datos;
+            break;
         default:
-        //crear
-        vehiculos.push(datos);
-        break;
+            //crear
+            vehiculos.push(datos);
+            break;
     }
     listarVehiculos();
     resetModal();
@@ -69,7 +70,7 @@ function enviarDatos(evento) {
 function editar(index) {
 
     return function cuandoCliqueo() {
-        btnGuardar.innerHTML='Editar';
+        btnGuardar.innerHTML = 'Editar';
         $('#exampleModal').modal('toggle');
         const vehiculo = vehiculos[index];
         marca.value = vehiculo.marca;
@@ -78,27 +79,37 @@ function editar(index) {
         tipopropietario.value = vehiculo.tipopropietario;
         indice.value = index;
     }
-  
-}
-
-function resetModal(){
-        marca.value = '';
-        linea.value = '';
-        tipovehiculo.value = '';
-        tipopropietario.value = '';
-        btnGuardar.innerHTML='Crear';
 
 }
 
-function eliminarVehiculo(index){
-    return function clickEnEliminar()
-    {    console.log(index);
-       vehiculos = vehiculos.filter((vehiculo, indiceVehiculo) => indiceVehiculo !== index);
-       listarVehiculos();
+function resetModal() {
+    marca.value = '';
+    linea.value = '';
+    tipovehiculo.value = '';
+    tipopropietario.value = '';
+    btnGuardar.innerHTML = 'Crear';
+
+}
+
+function eliminarVehiculo(index) {
+    return function clickEnEliminar() {
+        console.log(index);
+        vehiculos = vehiculos.filter((vehiculo, indiceVehiculo) => indiceVehiculo !== index);
+        listarVehiculos();
     }
 }
 
 listarVehiculos();
+
+function solicitarVehiculos() {
+    fetch('http://localhost:5000/vehiculos').then((respuesta) => {
+        if (respuesta.ok) {
+            return respuesta.json();
+        }
+    }).then(vehiculosDelServer => {
+        console.log( {vehiculosDelServer} );
+    });
+}
 
 form.onsubmit = enviarDatos;
 btnGuardar.onclick = enviarDatos;

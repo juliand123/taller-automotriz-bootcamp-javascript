@@ -13,6 +13,19 @@ module.exports = ((req, res) => {
     const rutaLimpia = ruta.replace(/^\/+|\/+$/g, '');
     //3.1 obtener el método http
     const metodo = req.method;
+    //3.1.1 dar permisos de CORS escribiendo los headers
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Request-Method",
+        "OPTIONS,GET,PUT,DELETE,POST");
+        res.setHeader("Access-Control-Allow-Headers", "*");
+        //3.1.2 dar respuesta inmediata cuando el metodo
+    if (metodo === 'options') {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
+
     //3.2 obtener las variables del query url 
     const { query = {} } = urlParseada;
     console.log({ query });
