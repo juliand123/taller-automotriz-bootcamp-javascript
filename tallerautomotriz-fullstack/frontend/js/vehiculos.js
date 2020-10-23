@@ -18,9 +18,10 @@ async function listarVehiculos() {
         if (Array.isArray(vehiculosDelServer)) {
             vehiculos = vehiculosDelServer;
         }
-        const htmlVehiculos = vehiculos
-            .map(
-                (vehiculo, index) => `<tr>
+        if (vehiculos.length > 0) {
+            const htmlVehiculos = vehiculos
+                .map(
+                    (vehiculo, index) => `<tr>
         <th scope="row">${index}</th>
         <td>${vehiculo.tipovehiculo}</td>
         <td>${vehiculo.marca}</td>
@@ -33,9 +34,16 @@ async function listarVehiculos() {
             </div> 
     </td>
     </tr>`).join("");
-        listaVehiculos.innerHTML = htmlVehiculos;
-        Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) => botonEditar.onclick = editar(index));
-        Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) => botonEliminar.onclick = eliminar(index));
+            listaVehiculos.innerHTML = htmlVehiculos;
+            Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) => botonEditar.onclick = editar(index));
+            Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) => botonEliminar.onclick = eliminar(index));
+            return;
+        }
+
+        listaVehiculos.innerHTML = `<tr>
+            <td colspan ="5"> No hay vehiculos
+            </td>
+        </tr>`
     }
     catch (error) {
         throw error;
@@ -97,21 +105,21 @@ function editar(index) {
 }
 
 function eliminar(index) {
-   
+
     return async function clickEnEliminar() {
         urlEnvio = `${url}/${index}`;
-       try {
-        const response = await fetch(urlEnvio, {
-            method: "DELETE"
-        });
+        try {
+            const response = await fetch(urlEnvio, {
+                method: "DELETE"
+            });
 
-        if (response.ok) {
-            listarVehiculos();
-            resetModal();
+            if (response.ok) {
+                listarVehiculos();
+                resetModal();
+            }
+        } catch (error) {
+            throw error;
         }
-       } catch (error) {
-           throw error;
-       }
     }
 }
 
