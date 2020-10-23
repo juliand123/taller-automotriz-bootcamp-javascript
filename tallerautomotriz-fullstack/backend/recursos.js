@@ -1,11 +1,12 @@
 module.exports = {
-    vehiculos: [{ tipoVehiculo: 'Sedan', marca: 'Honda', linea: 'Civic', tipoPropietario: 'Renting' },
-    { tipoVehiculo: 'Hatchback', marca: 'Nissan', linea: 'March', tipoPropietario: 'Renting' },
-    { tipoVehiculo: 'Sedan', marca: 'Honda', linea: 'Integra', tipoPropietario: 'Propio' },
-    { tipoVehiculo: 'Sedan', marca: 'Nissan', linea: 'Almera', tipoPropietario: 'Propio' },
-    { tipoVehiculo: 'Sedan', marca: 'Toyota', linea: 'Corolla', tipoPropietario: 'Propio' },
-    { tipoVehiculo: 'Sedan', marca: 'Renault', linea: 'Symbol', tipoPropietario: 'Renting' },
-    { tipoVehiculo: 'Camioneta', marca: 'Toyota', linea: 'Prado', tipoPropietario: 'Renting' }
+    vehiculos: [
+    { tipovehiculo: 'Sedan', marca: 'Honda', linea: 'Civic', tipopropietario: 'Renting' },
+    { tipovehiculo: 'Hatchback', marca: 'Nissan', linea: 'March', tipopropietario: 'Renting' },
+    { tipovehiculo: 'Sedan', marca: 'Honda', linea: 'Integra', tipopropietario: 'Propio' },
+    { tipovehiculo: 'Sedan', marca: 'Nissan', linea: 'Almera', tipopropietario: 'Propio' },
+    { tipovehiculo: 'Sedan', marca: 'Toyota', linea: 'Corolla', tipopropietario: 'Propio' },
+    { tipovehiculo: 'Sedan', marca: 'Renault', linea: 'Symbol', tipopropietario: 'Renting' },
+    { tipovehiculo: 'Camioneta', marca: 'Toyota', linea: 'Prado', tipopropietario: 'Renting' }
     ],
     mecanicos: [
         { tipoIdentificacion: 'Cedula', identificacion: '32520366', nombre: 'Alberto', apellido: 'Chamorro', pais: 'Colombia' },

@@ -15,30 +15,27 @@ async function listarVehiculos() {
     try {
         const respuesta = await fetch(url);
         const vehiculosDelServer = await respuesta.json();
-
-        if (Array.isArray(vehiculosDelServer) && vehiculosDelServer.length > 0) {
-
+        if (Array.isArray(vehiculosDelServer)) {
             vehiculos = vehiculosDelServer;
-
         }
         const htmlVehiculos = vehiculos
             .map(
                 (vehiculo, index) => `<tr>
         <th scope="row">${index}</th>
-        <td>${vehiculo.tipoVehiculo}</td>
+        <td>${vehiculo.tipovehiculo}</td>
         <td>${vehiculo.marca}</td>
         <td>${vehiculo.linea}</td>
-        <td>${vehiculo.tipoPropietario}</td>
+        <td>${vehiculo.tipopropietario}</td>
         <td>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-info editar"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn btn-danger eliminarVehiculo"><i class="far fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-danger eliminar"><i class="far fa-trash-alt"></i></button>
             </div> 
     </td>
     </tr>`).join("");
         listaVehiculos.innerHTML = htmlVehiculos;
         Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) => botonEditar.onclick = editar(index));
-        Array.from(document.getElementsByClassName('eliminarVehiculo')).forEach((botonEliminar, index) => botonEliminar.onclick = eliminarVehiculo(index));
+        Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) => botonEliminar.onclick = eliminar(index));
     }
     catch (error) {
         throw error;
@@ -61,20 +58,20 @@ async function enviarDatos(evento) {
         let method = "POST";
         let urlEnvio = url;
         const accion = btnGuardar.innerHTML;
-        if (accion == "Editar") {
+        if (accion === "Editar") {
             method = "PUT";
             vehiculos[indice.value] = datos;
-            urlEnvio = `${url}/indice.value`;
+            urlEnvio = `${url}/${indice.value}`;
         }
 
-        const respuesta = await fetch(urlEnvio, {
-           method,
+        const response = await fetch(urlEnvio, {
+            method,
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(datos),
         });
-        if (respuesta.ok) {
+        if (response.ok) {
             listarVehiculos();
             resetModal();
         }
@@ -82,11 +79,7 @@ async function enviarDatos(evento) {
     catch (error) {
         throw error;
     }
-
-
-
 }
-
 
 function editar(index) {
 
@@ -103,6 +96,25 @@ function editar(index) {
 
 }
 
+function eliminar(index) {
+   
+    return async function clickEnEliminar() {
+        urlEnvio = `${url}/${index}`;
+       try {
+        const response = await fetch(urlEnvio, {
+            method: "DELETE"
+        });
+
+        if (response.ok) {
+            listarVehiculos();
+            resetModal();
+        }
+       } catch (error) {
+           throw error;
+       }
+    }
+}
+
 function resetModal() {
     marca.value = '';
     linea.value = '';
@@ -110,14 +122,6 @@ function resetModal() {
     tipopropietario.value = '';
     btnGuardar.innerHTML = 'Crear';
 
-}
-
-function eliminarVehiculo(index) {
-    return function clickEnEliminar() {
-        console.log(index);
-        vehiculos = vehiculos.filter((vehiculo, indiceVehiculo) => indiceVehiculo !== index);
-        listarVehiculos();
-    }
 }
 
 listarVehiculos();
