@@ -46,7 +46,7 @@ async function listarVehiculos() {
         </tr>`
     }
     catch (error) {
-        throw error;
+        $(".alert").show();
 
     }
 
@@ -85,7 +85,7 @@ async function enviarDatos(evento) {
         }
     }
     catch (error) {
-        throw error;
+        $(".alert").show();
     }
 }
 
@@ -118,7 +118,7 @@ function eliminar(index) {
                 resetModal();
             }
         } catch (error) {
-            throw error;
+            $(".alert").show();
         }
     }
 }

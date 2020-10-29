@@ -1,7 +1,17 @@
+.lista-vacia{
+    text-align: center;
+}
 .actions-menu{
     padding: 40px 30px;
 }
+.actions-menu-content{
+  display: flex;
+  justify-content: space-between;
+}
+.actions-menu-content > button.btn.btn-primay{
+    height: 40px;
 
+}
 .actions-menu h1{
     margin-bottom: 20px
 }
@@ -10,4 +20,7 @@
  
         padding: 20px 0px; 
 
+}
+.alert{
+    display:none;
 }
