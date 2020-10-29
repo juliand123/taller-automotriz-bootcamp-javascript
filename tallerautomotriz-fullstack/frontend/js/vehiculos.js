@@ -41,7 +41,7 @@ async function listarVehiculos() {
         }
 
         listaVehiculos.innerHTML = `<tr>
-            <td colspan ="5"> No hay vehiculos
+            <td colspan ="5" class="lista-vacia"> No hay vehiculos
             </td>
         </tr>`
     }
