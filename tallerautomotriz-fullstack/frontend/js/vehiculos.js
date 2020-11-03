@@ -39,7 +39,6 @@ async function listarVehiculos() {
             Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) => botonEliminar.onclick = eliminar(index));
             return;
         }
-
         listaVehiculos.innerHTML = `<tr>
             <td colspan ="5" class="lista-vacia"> No hay vehiculos
             </td>
@@ -49,13 +48,10 @@ async function listarVehiculos() {
         $(".alert").show();
 
     }
-
-
 }
 
 async function enviarDatos(evento) {
     evento.preventDefault();
-
     try {
         const datos = {
             marca: marca.value,
@@ -63,15 +59,14 @@ async function enviarDatos(evento) {
             tipovehiculo: tipovehiculo.value,
             tipopropietario: tipopropietario.value
         };
-        let method = "POST";
-        let urlEnvio = url;
         const accion = btnGuardar.innerHTML;
+        let urlEnvio = url;
+        let method = "POST";
         if (accion === "Editar") {
             method = "PUT";
             vehiculos[indice.value] = datos;
             urlEnvio = `${url}/${indice.value}`;
         }
-
         const response = await fetch(urlEnvio, {
             method,
             headers: {
