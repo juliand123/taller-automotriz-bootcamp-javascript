@@ -12,8 +12,8 @@ module.exports = function diagnosticosHandler({diagnosticos,
             }
             const diagnosticosConRelaciones = diagnosticos.map((diagnostico)=>({
                 ...diagnostico, 
-                vehiculo: vehiculos[diagnostico.vehiculo],
-                mecanico: mecanicos[diagnostico.mecanico],
+                vehiculo: {...vehiculos[diagnostico.vehiculo], id: diagnostico.vehiculo},
+                mecanico: {...mecanicos[diagnostico.mecanico], id: diagnostico.mecanico},
             }));
             callback(200, diagnosticosConRelaciones);
         },

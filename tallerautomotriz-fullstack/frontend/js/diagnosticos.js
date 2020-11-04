@@ -1,8 +1,15 @@
+
 const listaDiagnosticos = document.getElementById("lista-diagnosticos");
-const tiposvehiculo = document.getElementById("vehiculo");
+const vehiculo = document.getElementById("vehiculo");
+const mecanico = document.getElementById("mecanico");
+const historia = document.getElementById("historia");
+const diagnostico = document.getElementById("diagnostico");
+const indice = document.getElementById('indice');
+const btnGuardar = document.getElementById('btn-guardar');
 
 let diagnosticos = [];
-
+let vehiculos = [];
+let mecanicos = [];
 
 const url = 'http://localhost:5000';
 
@@ -14,11 +21,11 @@ async function listarDiagnosticos() {
         if (Array.isArray(diagnosticosDelServidor)) {
             diagnosticos = diagnosticosDelServidor;
         }
-        if (diagnosticos.length >0) {
+        if (diagnosticos.length > 0) {
             let htmlDiagnosticos = diagnosticos
-            .map(
-                (diagnostico, index) => 
-                    `<tr>
+                .map(
+                    (diagnostico, index) =>
+                        `<tr>
                 <th scope="row">${index}</th>
                 <td>${diagnostico.vehiculo.marca} ${diagnostico.vehiculo.linea}</td>
                 <td>${diagnostico.mecanico.nombre} ${diagnostico.mecanico.apellido}</td>
@@ -28,12 +35,13 @@ async function listarDiagnosticos() {
                 <td>${diagnostico.diagnostico}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-info">Editar</button>
+                        <button class="editar" type="button" class="btn btn-info">Editar</button>
                     </div> 
                 </td>
              </tr>`).join("");
-               
+
             listaDiagnosticos.innerHTML = htmlDiagnosticos;
+            Array.from(document.getElementsByClassName("editar")).forEach((botonEditar, index) => botonEditar.onclick = editar(index));
         }
 
     } catch (error) {
@@ -51,11 +59,11 @@ async function listarVehiculos() {
             vehiculos = vehiculosDelServidor;
         }
         if (respuesta.ok) {
-            vehiculos.forEach((_vehiculo, indice) =>{ 
-               const optionActual = document.createElement("option");
-               optionActual.innerHTML = `${_vehiculo.marca} ${_vehiculo.linea}`;
-               optionActual.value = indice;
-               vehiculo.appendChild(optionActual);
+            vehiculos.forEach((_vehiculo, indice) => {
+                const optionActual = document.createElement("option");
+                optionActual.innerHTML = `${_vehiculo.marca} ${_vehiculo.linea}`;
+                optionActual.value = indice;
+                vehiculo.appendChild(optionActual);
             });
         }
 
@@ -74,11 +82,11 @@ async function listarMecanicos() {
             mecanicos = mecanicosDelServidor;
         }
         if (respuesta.ok) {
-            mecanicos.forEach((_mecanico, indice) =>{ 
-               const optionActual = document.createElement("option");
-               optionActual.innerHTML = `${_mecanico.nombre} ${_mecanico.apellido}`;
-               optionActual.value = indice;
-               mecanico.appendChild(optionActual);
+            mecanicos.forEach((_mecanico, indice) => {
+                const optionActual = document.createElement("option");
+                optionActual.innerHTML = `${_mecanico.nombre} ${_mecanico.apellido}`;
+                optionActual.value = indice;
+                mecanico.appendChild(optionActual);
             });
         }
 
@@ -87,6 +95,69 @@ async function listarMecanicos() {
     }
 
 }
+
+function editar(index) {
+
+    return function cuandoCliqueo() {
+        btnGuardar.innerHTML = 'Editar';
+        $('#exampleModal').modal('toggle');
+        const diagnostico = diagnosticos[index];
+        indice.value = index;
+        vehiculo.value = diagnostico.vehiculo.id;
+        mecanico.value = diagnostico.mecanico.id;
+        historia.value = diagnostico.historia;
+        diagnostico.value = diagnostico.diagnostico;
+    }
+
+}
+
+async function enviarDatos(evento) {
+    const entidad = "diagnosticos";
+    evento.preventDefault();
+    try {
+        const datos = {
+            vehiculo: vehiculo.value,
+            mecanico: mecanico.value,
+            historia: historia.value,
+            diagnostico: diagnostico.value,
+            indice: indice.value
+        };
+        const accion = btnGuardar.innerHTML;
+        let urlEnvio = `${url}/${entidad}`;
+        let method = "POST";
+        if (accion === "Editar") {
+            method = "PUT";
+            urlEnvio = `${url}/${entidad}/${indice.value}`;
+        }
+        const response = await fetch(urlEnvio, {
+            method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        if (response.ok) {
+            listarDiagnosticos();
+            resetModal();
+        }
+    }
+    catch (error) {
+        throw error;
+        //$(".alert").show();
+    }
+}
+
+function resetModal() {
+
+    vehiculo.value = "",
+        mecanico.value = "",
+        historia.value = "",
+        diagnostico.value = "",
+        btnGuardar.innerHTML = 'Crear'
+        $('#exampleModal').modal('toggle');
+}
+
+btnGuardar.onclick = enviarDatos;
 
 listarVehiculos();
 listarMecanicos();
