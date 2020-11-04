@@ -2,7 +2,7 @@ const listaDiagnosticos = document.getElementById("lista-diagnosticos");
 const tiposvehiculo = document.getElementById("vehiculo");
 
 let diagnosticos = [];
-let vehiculosreparar=[];
+
 
 const url = 'http://localhost:5000';
 
@@ -64,5 +64,30 @@ async function listarVehiculos() {
     }
 
 }
+
+async function listarMecanicos() {
+    const entidad = 'mecanicos'
+    try {
+        const respuesta = await fetch(`${url}/${entidad}`);
+        const mecanicosDelServidor = await respuesta.json();
+        if (Array.isArray(mecanicosDelServidor)) {
+            mecanicos = mecanicosDelServidor;
+        }
+        if (respuesta.ok) {
+            mecanicos.forEach((_mecanico, indice) =>{ 
+               const optionActual = document.createElement("option");
+               optionActual.innerHTML = `${_mecanico.nombre} ${_mecanico.apellido}`;
+               optionActual.value = indice;
+               mecanico.appendChild(optionActual);
+            });
+        }
+
+    } catch (error) {
+        throw (error);
+    }
+
+}
+
 listarVehiculos();
+listarMecanicos();
 listarDiagnosticos();
