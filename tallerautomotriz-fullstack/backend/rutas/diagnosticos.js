@@ -1,4 +1,7 @@
-module.exports = function diagnosticosHandler(diagnosticos) {
+module.exports = function diagnosticosHandler({diagnosticos, 
+    mecanicos, 
+    vehiculos,
+}) {
     return {
         GET: (data, callback) => {
             if (data.indice) {
@@ -7,7 +10,12 @@ module.exports = function diagnosticosHandler(diagnosticos) {
                 }
                 return callback(404, { mensaje: `diagnostico con indice ${data.indice} no encontrado` });
             }
-            callback(200, diagnosticos);
+            const diagnosticosConRelaciones = diagnosticos.map((diagnostico)=>({
+                ...diagnostico, 
+                vehiculo: vehiculos[diagnostico.vehiculo],
+                mecanico: mecanicos[diagnostico.mecanico],
+            }));
+            callback(200, diagnosticosConRelaciones);
         },
         POST: (data, callback) => {
             let nuevodiagnostico = data.payload;

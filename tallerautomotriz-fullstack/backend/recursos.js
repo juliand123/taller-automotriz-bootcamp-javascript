@@ -20,16 +20,16 @@ module.exports = {
     ],
     diagnosticos: [
         {
-        vehiculo: 'Mazda',
-        mecanico: 'alberto',
+        vehiculo: '0',
+        mecanico: '0',
         fechaCreacion: new Date(),
         fechaEdicion: null,
         historia: "",
         diagnostico: ""
     },
     {
-        vehiculo: 'Mazda',
-        mecanico: 'Toño',
+        vehiculo: '0',
+        mecanico: '0',
         fechaCreacion: new Date(),
         fechaEdicion: null,
         historia: "",

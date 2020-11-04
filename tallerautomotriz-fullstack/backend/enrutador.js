@@ -11,7 +11,7 @@ module.exports = {
     vehiculos: vehiculos(recursos.vehiculos), 
     mecanicos: mecanicos(recursos.mecanicos),
     duenos: duenos(recursos.duenos),
-    diagnosticos: diagnosticos(recursos.diagnosticos),
+    diagnosticos: diagnosticos(recursos),
 
     noEncontrado: (data, callback) => {
         callback(404, { mensaje: 'no encontrado' });
