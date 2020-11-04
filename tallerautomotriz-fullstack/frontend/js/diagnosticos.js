@@ -1,10 +1,15 @@
 const listaDiagnosticos = document.getElementById("lista-diagnosticos");
+const tiposvehiculo = document.getElementById("vehiculo");
+
 let diagnosticos = [];
-const url = 'http://localhost:5000/diagnosticos';
+let vehiculosreparar=[];
+
+const url = 'http://localhost:5000';
 
 async function listarDiagnosticos() {
+    const entidad = 'diagnosticos'
     try {
-        const respuesta = await fetch(url);
+        const respuesta = await fetch(`${url}/${entidad}`);
         const diagnosticosDelServidor = await respuesta.json();
         if (Array.isArray(diagnosticosDelServidor)) {
             diagnosticos = diagnosticosDelServidor;
@@ -37,4 +42,27 @@ async function listarDiagnosticos() {
 
 }
 
+async function listarVehiculos() {
+    const entidad = 'vehiculos'
+    try {
+        const respuesta = await fetch(`${url}/${entidad}`);
+        const vehiculosDelServidor = await respuesta.json();
+        if (Array.isArray(vehiculosDelServidor)) {
+            vehiculos = vehiculosDelServidor;
+        }
+        if (respuesta.ok) {
+            vehiculos.forEach((_vehiculo, indice) =>{ 
+               const optionActual = document.createElement("option");
+               optionActual.innerHTML = `${_vehiculo.marca} ${_vehiculo.linea}`;
+               optionActual.value = indice;
+               vehiculo.appendChild(optionActual);
+            });
+        }
+
+    } catch (error) {
+        throw (error);
+    }
+
+}
+listarVehiculos();
 listarDiagnosticos();

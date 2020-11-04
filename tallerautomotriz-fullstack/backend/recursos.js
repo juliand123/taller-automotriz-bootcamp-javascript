@@ -25,7 +25,7 @@ module.exports = {
         fechaCreacion: new Date(),
         fechaEdicion: null,
         historia: "",
-        diagnostico: ""
+        diagnostico: "diagnostico"
     },
     {
         vehiculo: '0',
@@ -33,7 +33,7 @@ module.exports = {
         fechaCreacion: new Date(),
         fechaEdicion: null,
         historia: "",
-        diagnostico: ""
+        diagnostico: "diagnostico"
     }
 
 ],
