@@ -35,7 +35,7 @@ async function listarDiagnosticos() {
                 <td>${diagnostico.diagnostico}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button class="editar" type="button" class="btn btn-info">Editar</button>
+                        <button class="btn btn-info editar" type="button" class="btn btn-info">Editar</button>
                     </div> 
                 </td>
              </tr>`).join("");
