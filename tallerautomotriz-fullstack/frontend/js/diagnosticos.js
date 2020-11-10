@@ -45,7 +45,7 @@ async function listarDiagnosticos() {
         }
 
     } catch (error) {
-        throw (error);
+        $(".alert").show();
     }
 
 }
@@ -68,7 +68,7 @@ async function listarVehiculos() {
         }
 
     } catch (error) {
-        throw (error);
+        $(".alert").show();
     }
 
 }
@@ -91,7 +91,7 @@ async function listarMecanicos() {
         }
 
     } catch (error) {
-        throw (error);
+        $(".alert").show();
     }
 
 }
@@ -119,31 +119,35 @@ async function enviarDatos(evento) {
             vehiculo: vehiculo.value,
             mecanico: mecanico.value,
             historia: historia.value,
-            diagnostico: diagnostico.value,
-            indice: indice.value
+            diagnostico: diagnostico.value
         };
-        const accion = btnGuardar.innerHTML;
-        let urlEnvio = `${url}/${entidad}`;
-        let method = "POST";
-        if (accion === "Editar") {
-            method = "PUT";
-            urlEnvio = `${url}/${entidad}/${indice.value}`;
-        }
-        const response = await fetch(urlEnvio, {
-            method,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(datos),
-        });
-        if (response.ok) {
-            listarDiagnosticos();
-            resetModal();
-        }
+        if (validar(datos) === true) {
+            const accion = btnGuardar.innerHTML;
+            let urlEnvio = `${url}/${entidad}`;
+            let method = "POST";
+            if (accion === "Editar") {
+                method = "PUT";
+                urlEnvio = `${url}/${entidad}/${indice.value}`;
+            }
+            const response = await fetch(urlEnvio, {
+                method,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(datos),
+            });
+            if (response.ok) {
+                listarDiagnosticos();
+                resetModal();
+            }
+
+            return;
+         
+        };
+        $(".alert").show();
     }
     catch (error) {
-        throw error;
-        //$(".alert").show();
+        $(".alert").show();
     }
 }
 
@@ -154,9 +158,18 @@ function resetModal() {
         historia.value = "",
         diagnostico.value = "",
         btnGuardar.innerHTML = 'Crear'
-        $('#exampleModal').modal('toggle');
+    $('#exampleModal').modal('toggle');
 }
 
+function validar(datos) {
+    if (typeof datos !=='object') return false;
+    for (let llave in datos) {
+        if (datos[llave].length === 0) return false;
+    }
+    return true;
+
+
+}
 btnGuardar.onclick = enviarDatos;
 
 listarVehiculos();
