@@ -36,7 +36,8 @@ async function listarDiagnosticos() {
                 <td>${diagnostico.diagnostico}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button class="btn btn-info editar" type="button" class="btn btn-info">Editar</button>
+                        
+                        <button type="button" class="btn btn-info editar"><i class="fas fa-edit"></i></button>
                     </div> 
                 </td>
              </tr>`).join("");
@@ -141,12 +142,10 @@ async function enviarDatos(evento) {
                 listarDiagnosticos();
                 resetModal();
             }
-            formulario.classList.add('was-validated');
+           
             return;
-
         };
         $(".alert-warning").show();
-
     }
     catch (error) {
         $(".alert-danger").show();
@@ -154,12 +153,14 @@ async function enviarDatos(evento) {
 }
 
 function resetModal() {
+    btnGuardar.innerHTML = 'Crear';
+    [indice, vehiculo, mecanico, historia, diagnostico].forEach((inputActual)=>{
+        inputActual.value = "";
+        inputActual.classList.remove("is-invalid");
+        inputActual.classList.remove("is-valid");
 
-    vehiculo.value = "",
-        mecanico.value = "",
-        historia.value = "",
-        diagnostico.value = "",
-        btnGuardar.innerHTML = 'Crear'
+    });
+    $(".alert-warning").hide();
     $('#exampleModal').modal('toggle');
 }
 
