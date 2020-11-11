@@ -12,7 +12,7 @@ let diagnosticos = [];
 let vehiculos = [];
 let mecanicos = [];
 
-const url = 'https://taller-automotriz-backend-9dn199mds.vercel.app';
+const url = 'https://taller-automotriz-backend.vercel.app';
 
 async function listarDiagnosticos() {
     const entidad = 'diagnosticos'
