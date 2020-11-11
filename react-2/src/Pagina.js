@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "./componentes/Nav";
 import ActionsMenu from "./componentes/ActionsMenu";
+import Table from "./componentes/Table";
 
 function Vehiculos() {
 
@@ -9,20 +10,7 @@ function Vehiculos() {
             <div className="container">
                 <Nav />
                 <ActionsMenu />
-                <table className="table table-stripped table-hover">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tipo Vehículo</th>
-                            <th scope="col">Marca</th>
-                            <th scope="col">Línea</th>
-                            <th scope="col">Tipo Propietario</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista-vehiculos">
-                    </tbody>
-                </table>
+                <Table />
             </div>
             <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
