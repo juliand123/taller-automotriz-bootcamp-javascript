@@ -7,7 +7,7 @@ const pais = document.getElementById('pais');
 const indice = document.getElementById('indice');
 const form = document.getElementById('form');
 const btnGuardar = document.getElementById('btn-guardar');
-const url = 'https://taller-automotriz-backend-9dn199mds.vercel.app/mecanicos';
+const url = 'https://taller-automotriz-backend.vercel.app/mecanicos';
 
 let mecanicos = [];
 
