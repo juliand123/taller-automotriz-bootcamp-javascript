@@ -6,7 +6,7 @@ const tipopropietario = document.getElementById('tipopropietario');
 const indice = document.getElementById('indice');
 const form = document.getElementById('form');
 const btnGuardar = document.getElementById('btn-guardar');
-const url = "http://localhost:5000/vehiculos";
+const url = "https://taller-automotriz-backend-9dn199mds.vercel.app/vehiculos";
 
 let vehiculos = [];
 
