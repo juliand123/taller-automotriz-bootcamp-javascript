@@ -1,9 +1,9 @@
 import React from "react";
-
+import "./Nav.css";
 function Nav() {
   return (<nav className="navbar navbar-dark bg-dark navbar-expand-lg " >
   <a className="navbar-brand" href="#">Taller Mecanica</a>
-  <button className="navbar-toggler" 
+  {/* <button className="navbar-toggler" 
     type="button" 
     data-toggle="collapse" 
     data-target="#navbarColor03" 
@@ -12,7 +12,7 @@ function Nav() {
     aria-label="Toggle navigation"
  >
       <span className="navbar-toggler-icon"></span>
-  </button>
+  </button> */}
   <div className="collapse navbar-collapse" id="navbarColor03">
       <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
