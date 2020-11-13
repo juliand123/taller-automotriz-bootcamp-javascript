@@ -1,4 +1,5 @@
 import React from "react";
+import "./Header.css"
 
 function Header(props) {
     if (props.columnas.lenght === 0) return false;

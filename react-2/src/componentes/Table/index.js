@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Row from "./Row";
+import "./Table.css"
 
 function Table() {
     const [vehiculos, setVehiculos] = useState([
