@@ -11,6 +11,7 @@ function Vehiculos() {
                 <Nav />
                 <ActionsMenu />
                 <Table />
+                <Modal />
             </div>
         </>
     );

@@ -1,12 +1,18 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons"
+import classNames from "classnames"
+import "./ActionButton.css";
 
-function ActionButton() {
-    return (<button type="button" class="btn btn-info editar">
+function ActionButton({tipo}) {
+    return (<button type="button" className={classNames("btn", {
+        "btn-info": tipo ==="editar" }, {
+        "btn-danger": tipo ==="eliminar", 
+        })}>
+
         { tipo === "editar" && <FontAwesomeIcon icon={faEdit} />}
-        { tipo === "eliminar" && <FontAwesomeIcon icon={faTrashAlt} />}
-    </button>
+        { tipo === "eliminar" && <FontAwesomeIcon icon={faTrashAlt} /> }
+    </button >
     );
 }
 
