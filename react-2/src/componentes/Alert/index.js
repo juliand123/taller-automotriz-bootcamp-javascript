@@ -2,8 +2,7 @@
 import React from "react";
 import "./Alert.css";
 
-function Alert(props) {
- console.log(props);
+function Alert({alertSwitch = ()=>{}}) {
  return (<div className="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Opps!</strong> Algo esta muy mal, por favor vuelve a intentarlo!.
         <button
@@ -11,7 +10,7 @@ function Alert(props) {
             className="close"
             data-dismiss="alert"
             aria-label="Close"
-            onClick={props.alertSwitch}
+            onClick={alertSwitch}
         >
             <span aria-hidden="true">&times;</span>
         </button>
