@@ -1,5 +1,6 @@
 import React from "react";
-import Modal from ".";
+import "./ModalHeader.css";
+
 
 function ModalHeader(){
     return(

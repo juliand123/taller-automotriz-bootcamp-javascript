@@ -1,21 +1,14 @@
 import React from "react"
+import "./Select.css";
 
-function Select() {
+function Select({ options = [], nombreCampo = 'vacio' }) {
     return (
-        <div className="form-row">
-            <div className="col">
-                <select className="form-control" id="tipovehiculo">
-                    <option>Tipo Vehículo</option>
-                    <option>Sedan</option>
-                    <option>Automovil</option>
-                    <option>Camioneta</option>
-                    <option>Crosover</option>
-                    <option>Camion</option>
-                    <option>Otro</option>
-                </select>
-            </div>
-        </div>
+        <select  id="tipovehiculo" className="form-control">
+            <option value="">Seleccione {nombreCampo}</option>
+            {options.map(({ valor, etiqueta }, index) => (
+                <option key={`${nombreCampo}-${index}-${valor}-${etiqueta}`} 
+                value={valor}>{etiqueta}</option>))}
+        </select>
     );
 }
-
 export default Select; 
