@@ -22,13 +22,13 @@ const tiposDuenos = [
     { valor: "Otro", etiqueta: "Otro" },
 ];
 
-function Modal() {
+function Modal({ cambiarModal = ()=>{} }) {
     return (
         <>
             <div className="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <ModalHeader />
+                        <ModalHeader cambiarModal={cambiarModal} />
                         <div className="modal-body">
                             <form id="form">
                                 <div className="form-row">
@@ -49,7 +49,7 @@ function Modal() {
                                 </div>
                             </form>
                         </div>
-                       <ModalFooter />
+                       <ModalFooter cambiarModal={cambiarModal} />
                     </div>
                 </div>
             </div>
