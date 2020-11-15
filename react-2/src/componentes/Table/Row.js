@@ -9,7 +9,7 @@ function Row({ entidad, index }) {
             <td>{entidad.linea}</td>
             <td>{entidad.tipopropietario}</td>
             <td>
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div className="btn-group" role="group" aria-label="Basic example">
                     <ActionButton tipo="editar" />
                     <ActionButton tipo="eliminar" />
                 </div>

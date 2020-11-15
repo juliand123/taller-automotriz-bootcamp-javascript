@@ -22,10 +22,10 @@ const tiposDuenos = [
     { valor: "Otro", etiqueta: "Otro" },
 ];
 
-function Modal({ cambiarModal = ()=>{} }) {
+function Modal({ cambiarModal = () => { }, manejarInput = () => { } }) {
     return (
         <>
-            <div className="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <ModalHeader cambiarModal={cambiarModal} />
@@ -33,27 +33,40 @@ function Modal({ cambiarModal = ()=>{} }) {
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select options={tiposVehiculo}
-                                            nombreCampo="Tipo Vehiculo"
+                                        <Select
+                                            nombreCampo="tipovehiculo"
+                                            options={tiposVehiculo}
+                                            onChange={manejarInput}
+                                            placeholder="Tipo Vehiculo"
                                         />
                                     </div>
                                 </div>
-                               <Input tipo="text" nombreCampo= "Marca" />
+                                <Input
+                                    nombreCampo="marca"
+                                    tipo="text"
+                                    onInput={manejarInput}
+                                    placeholder="Marca" />
                                 <div className="col">
-                                <Input tipo="text" nombreCampo = "Linea"/>
+                                    <Input tipo="text"
+                                        nombreCampo="linea"
+                                        onInput={manejarInput}
+                                        placeholder="Linea" />
                                 </div>
                                 <div className="col">
-                                    <Select options={tiposDuenos}
-                                        nombreCampo="Tipo Dueño"
+                                    <Select 
+                                    nombreCampo="tipopropietario"
+                                    options={tiposDuenos} 
+                                    onChange={manejarInput}
+                                    placeholder="Tipo Dueño"
                                     />
                                 </div>
                             </form>
                         </div>
-                       <ModalFooter cambiarModal={cambiarModal} />
+                        <ModalFooter cambiarModal={cambiarModal} />
                     </div>
                 </div>
             </div>
-            <div class="modal-backdrop fade show"></div>
+            <div className="modal-backdrop fade show"></div>
         </>
     );
 }
