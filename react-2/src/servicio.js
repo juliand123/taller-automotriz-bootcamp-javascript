@@ -19,8 +19,8 @@ export const CrearEditarEntidad = async ({
 }) => {
     try {
         let url = null;
-        if (method === 'PUT' && idObjeto) {
-            url += `${API_URL}/${entidad}/${idObjeto}`;
+        if (method === 'PUT' && (idObjeto || idObjeto === 0)) {
+            url = `${API_URL}/${entidad}/${idObjeto}`;
         }
         else if (method === "POST") {
 
@@ -29,7 +29,7 @@ export const CrearEditarEntidad = async ({
         if (!url) {
             throw new Error('No cumple criterios de envio');
         }
-        const respuesta = await fetch(`${API_URL}/${entidad}`, {
+        const respuesta = await fetch(url, {
             method: method,
             headers: {
                 "Content-Type": "application/json",
@@ -38,6 +38,22 @@ export const CrearEditarEntidad = async ({
         });
         const datos = await respuesta.json();
         return datos;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+export const eliminarEntidad = async ({
+    entidad = "vehiculos",
+    idObjeto = null, }) => {
+    try {
+        if (idObjeto || idObjeto === 0) {
+        const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`, {method: "DELETE"});
+        const datos = await respuesta.json();
+        return datos;
+        }
+        throw new Error("idbjeto no puede estar vacio");
     } catch (error) {
         console.log(error);
     }

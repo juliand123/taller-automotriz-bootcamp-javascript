@@ -22,7 +22,12 @@ const tiposDuenos = [
     { valor: "Otro", etiqueta: "Otro" },
 ];
 
-function Modal({ cambiarModal = () => { }, manejarInput = () => { } }) {
+function Modal({
+    cambiarModal = () => { },
+    manejarInput = () => { },
+    crearEntidad = () => { },
+    objeto = () => { }
+}) {
     return (
         <>
             <div className="modal" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,6 +43,7 @@ function Modal({ cambiarModal = () => { }, manejarInput = () => { } }) {
                                             options={tiposVehiculo}
                                             onChange={manejarInput}
                                             placeholder="Tipo Vehiculo"
+                                            value={objeto.tipovehiculo}
                                         />
                                     </div>
                                 </div>
@@ -45,24 +51,29 @@ function Modal({ cambiarModal = () => { }, manejarInput = () => { } }) {
                                     nombreCampo="marca"
                                     tipo="text"
                                     onInput={manejarInput}
-                                    placeholder="Marca" />
+                                    placeholder="Marca" 
+                                    value={objeto.marca}
+                                    />
                                 <div className="col">
                                     <Input tipo="text"
                                         nombreCampo="linea"
                                         onInput={manejarInput}
-                                        placeholder="Linea" />
+                                        placeholder="Linea" 
+                                        value={objeto.linea}
+                                        />
                                 </div>
                                 <div className="col">
-                                    <Select 
-                                    nombreCampo="tipopropietario"
-                                    options={tiposDuenos} 
-                                    onChange={manejarInput}
-                                    placeholder="Tipo Dueño"
+                                    <Select
+                                        nombreCampo="tipopropietario"
+                                        options={tiposDuenos}
+                                        onChange={manejarInput}
+                                        placeholder="Tipo Dueño"
+                                        value={objeto.tipopropietario}
                                     />
                                 </div>
                             </form>
                         </div>
-                        <ModalFooter cambiarModal={cambiarModal} />
+                        <ModalFooter cambiarModal={cambiarModal} crearEntidad={crearEntidad} />
                     </div>
                 </div>
             </div>

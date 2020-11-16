@@ -5,12 +5,15 @@ function Select({
     options = [],
     nombreCampo = 'vacio',
     onChange = () => { },
-    placeholder, }) {
+    placeholder,
+    value ="", }) {
     return (
         <select id="tipovehiculo"
             className="form-control"
             onChange={onChange}
-            name={nombreCampo}>
+            name={nombreCampo}
+            defaultValue={value}
+            >
             <option value="">Seleccione {placeholder}</option>
             {options.map(({ valor, etiqueta }, index) => (
                 <option
