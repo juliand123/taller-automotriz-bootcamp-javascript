@@ -22,6 +22,7 @@ function Table( {entidades = [],
                     entidad={entidad}
                     editarEntidad={editarEntidad}
                     eliminarEntidad={eliminarEntidad}
+                    columnas={columnas}
                      />
                 ))}
             </tbody>
