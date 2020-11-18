@@ -6,11 +6,10 @@ import "./Table.css"
 
 function Table( {entidades = [], 
     editarEntidad=() => {},
-    eliminarEntidad=() => {}
+    eliminarEntidad=() => {},
+    columnas = [],
 }) {
     
-
-    const columnas = entidades.length > 0 ? Object.keys(entidades[0]) : [];
     return (
         <table className="table table-stripped table-hover">
             <Header columnas={columnas} />

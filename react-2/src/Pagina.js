@@ -25,7 +25,11 @@ class Pagina extends Component {
         try {
             const { entidad } = this.props;
             const entidades = await listarEntidad({ entidad });
-            this.setState({ entidades });
+            let columnas = [];
+            if (Array.isArray(entidades) && entidades.length > 0) {
+                columnas =  Object.keys(entidades[0] || []);
+            }
+            this.setState({ entidades, columnas });
         } catch (error) {
 
         }
@@ -83,7 +87,9 @@ class Pagina extends Component {
                 <Table
                     entidades={this.state.entidades}
                     editarEntidad={this.editarEntidad}
-                    eliminarEntidad={this.eliminarEntidad} />
+                    eliminarEntidad={this.eliminarEntidad} 
+                    columnas={this.state.columnas}
+                    />
 
                 {this.state.mostrarModal &&
                     <Modal cambiarModal={this.cambiarModal}

@@ -15,11 +15,14 @@ function App() {
         path="/"
         component={() => (<Pagina titulo="Vehiculos" entidad="vehiculos" />)}
       />
-      <Route path="/mecanicos" component={() => (<Pagina titulo="Mecanicos" entidad="mecanicos" />)}
+      <Route path="/mecanicos" component={(props) => (
+      < Pagina {...props} titulo="Mecanicos" entidad="mecanicos"  />)}
       />
-      <Route path="/duenos" component={() => (<Pagina titulo="Dueños" entidad="duenos" />)}
+      <Route path="/duenos" component={(props) => (
+      <Pagina {...props} titulo="Dueños" entidad="duenos" />)}
       />
-      <Route path="/diagnosticos" component={() => (<Pagina titulo="Diagnosticos" entidad="diagnosticos" />)}
+      <Route path="/diagnosticos" component={(props) => (
+      <Pagina {...props} titulo="Diagnosticos" entidad="diagnosticos" />)}
       />
     </Switch>
     </div>
