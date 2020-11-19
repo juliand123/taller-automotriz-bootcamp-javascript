@@ -26,7 +26,8 @@ function Modal({
     cambiarModal = () => { },
     manejarInput = () => { },
     crearEntidad = () => { },
-    objeto = () => { }
+    objeto = () => { },
+    children = []
 }) {
     return (
         <>
@@ -37,39 +38,7 @@ function Modal({
                         <div className="modal-body">
                             <form id="form">
                                 <div className="form-row">
-                                    <div className="col">
-                                        <Select
-                                            nombreCampo="tipovehiculo"
-                                            options={tiposVehiculo}
-                                            onChange={manejarInput}
-                                            placeholder="Tipo Vehiculo"
-                                            value={objeto.tipovehiculo}
-                                        />
-                                    </div>
-                                </div>
-                                <Input
-                                    nombreCampo="marca"
-                                    tipo="text"
-                                    onInput={manejarInput}
-                                    placeholder="Marca" 
-                                    value={objeto.marca}
-                                    />
-                                <div className="col">
-                                    <Input tipo="text"
-                                        nombreCampo="linea"
-                                        onInput={manejarInput}
-                                        placeholder="Linea" 
-                                        value={objeto.linea}
-                                        />
-                                </div>
-                                <div className="col">
-                                    <Select
-                                        nombreCampo="tipopropietario"
-                                        options={tiposDuenos}
-                                        onChange={manejarInput}
-                                        placeholder="Tipo Dueño"
-                                        value={objeto.tipopropietario}
-                                    />
+                                    {children}
                                 </div>
                             </form>
                         </div>

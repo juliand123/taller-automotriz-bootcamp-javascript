@@ -6,14 +6,16 @@ function Select({
     nombreCampo = 'vacio',
     onChange = () => { },
     placeholder,
-    value ="", }) {
+    value = "",
+}) {
     return (
-        <select id="tipovehiculo"
+        <select
+            id={nombreCampo}
             className="form-control"
             onChange={onChange}
             name={nombreCampo}
             defaultValue={value}
-            >
+        >
             <option value="">Seleccione {placeholder}</option>
             {options.map(({ valor, etiqueta }, index) => (
                 <option
