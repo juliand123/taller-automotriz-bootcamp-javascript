@@ -17,18 +17,10 @@ const ComponenteCampo = ({
     nombreCampo = "",
 }) => {
     switch (nombreCampo) {
-        case 'tipo':
         case 'tipoidentificacion':
         case 'mecanico':
         case 'tipovehiculo':
         case 'tipopropietario':
-            return (<Select
-                nombreCampo={nombreCampo}
-                options={tiposvehiculo}
-                onChange={manejarInput}
-                placeholder={nombreCampo}
-                value={objeto[nombreCampo]}
-            />);
         case 'identificacion':
         case 'nombre':
         case 'apellido':
@@ -38,14 +30,29 @@ const ComponenteCampo = ({
         case 'pais':
         case 'marca':
         case 'linea':
+            return (
+                <div className="form-row">
+                    <Select
+                        nombreCampo={nombreCampo}
+                        options={tiposvehiculo}
+                        onChange={manejarInput}
+                        placeholder={nombreCampo}
+                        value={objeto[nombreCampo]}
+                    />
+                </div>);
+
+            return (
+                <Input
+                    nombreCampo={nombreCampo}
+                    tipo="text"
+                    onInput={manejarInput}
+                    placeholder={nombreCampo}
+                    value={objeto.[nombreCampo]}
+                />
+            );
+        default:
+            return false;
     }
-    return (<Input
-        nombreCampo={nombreCampo}
-        tipo="text"
-        onInput={manejarInput}
-        placeholder={nombreCampo}
-        value={objeto.[nombreCampo]}
-    />);
 };
 
 class Pagina extends Component {
@@ -147,7 +154,7 @@ class Pagina extends Component {
                         {columnas.map((columna, index) => (
                             <ComponenteCampo
                                 key={index}
-                                manejarInput={manejarInput}
+                                manejarInput={this.manejarInput}
                                 objeto={this.state.objeto}
                                 nombreCampo={columna}
                             />
