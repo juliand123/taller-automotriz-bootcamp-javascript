@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "1ba70830-354e-4803-9979-6cc16b8e7866",
+		"name": "MasterJavaScript",
+		"description": "coleccion para consumos del curso de master en javascript",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "vehiculos",
+			"item": [
+				{
+					"name": "CrearVehiculo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoVehiculo\": \"Camioneta\",\r\n    \"marca\": \"Nissan\",\r\n    \"linea\": \"Qasqai\",\r\n    \"tipoPropietario\": \"Renting\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehiculos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehiculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarVehiculo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tipoVehiculo\": \"maloSedan\",\r\n        \"marca\": \"malo\",\r\n        \"linea\": \"S2000\",\r\n        \"tipoPropietario\": \"malo\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehiculos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehiculos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarVehiculos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehiculos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehiculos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerUnVehiculo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehiculos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehiculos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarVehiculo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehiculos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehiculos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "mecanicos",
+			"item": [
+				{
+					"name": "CrearMecanico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"tipoIdentificacion\": \"Cedula\",\r\n        \"identificacion\": \"32520366\",\r\n        \"nombre\": \"Arnulf\",\r\n        \"apellido\": \"Chamorro\",\r\n        \"pais\": \"Colombia\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/mecanicos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"mecanicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarMecanico",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"tipoIdentificacion\": \"Cedula\",\r\n        \"identificacion\": \"32520366\",\r\n        \"nombre\": \"Malo\",\r\n        \"apellido\": \"Chamorro\",\r\n        \"pais\": \"Peru\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/mecanicos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"mecanicos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarMecanicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/mecanicos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"mecanicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerUnMecanico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/mecanicos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"mecanicos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarMecanico",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/mecanicos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"mecanicos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "duenos",
+			"item": [
+				{
+					"name": "CrearDueno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"tipoIdentificacion\": \"Cedula\",\r\n        \"identificacion\": \"32520366\",\r\n        \"nombre\": \"Arnulf\",\r\n        \"apellido\": \"Capuleto\",\r\n        \"pais\": \"Colombia\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/duenos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"duenos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarDueno",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"tipoIdentificacion\": \"Cedula\",\r\n        \"identificacion\": \"32520366\",\r\n        \"nombre\": \"Malo\",\r\n        \"apellido\": \"Chamorro\",\r\n        \"pais\": \"Peru\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/duenos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"duenos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarDuenos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/duenos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"duenos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerUnDueno",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/duenos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"duenos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarDueno",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/duenos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"duenos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d39daf35-d5a4-4d01-b7a1-22b452a42d26",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1248940-e053-44ca-bb84-41b073ae29c3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "diagnosticos",
+			"item": [
+				{
+					"name": "CrearDiagnostico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"vehiculo\": 1,\r\n        \"mecanico\": 1,\r\n        \"historia\": \"el vehiculo tiene una fuga de aceite\",\r\n        \"diagnostico\": \"motor para reparar\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/diagnosticos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"diagnosticos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarDiagnostico",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"vehiculo\": 5,\r\n        \"mecanico\": 5,\r\n        \"fechaCreacion\": \"2020-10-19T01:23:29.501Z\",\r\n        \"historia\": \"malo ese carro\",\r\n        \"diagnostico\": \"\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/diagnosticos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"diagnosticos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarDiagnosticos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/diagnosticos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"diagnosticos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerUnDiagnostico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/diagnosticos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"diagnosticos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarUnDiagnostico",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/diagnosticos/:indice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"diagnosticos",
+								":indice"
+							],
+							"variable": [
+								{
+									"key": "indice",
+									"value": "0",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8763a6bc-8282-4367-8f92-36aad2583862",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fffe926-5d77-4a50-93be-e515e15b3915",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
