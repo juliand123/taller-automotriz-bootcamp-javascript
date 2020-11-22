@@ -28,8 +28,8 @@ module.exports = {
         diagnostico: "diagnostico"
     },
     {
-        vehiculo: '0',
-        mecanico: '0',
+        vehiculo: '1',
+        mecanico: '1',
         fechaCreacion: new Date(),
         fechaEdicion: null,
         historia: "",

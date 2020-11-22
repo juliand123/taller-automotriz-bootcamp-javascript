@@ -1,4 +1,5 @@
-module.exports = function diagnosticosHandler({diagnosticos, 
+module.exports = function diagnosticosHandler({
+    diagnosticos, 
     mecanicos, 
     vehiculos,
 }) {
@@ -10,12 +11,38 @@ module.exports = function diagnosticosHandler({diagnosticos,
                 }
                 return callback(404, { mensaje: `diagnostico con indice ${data.indice} no encontrado` });
             }
-            const diagnosticosConRelaciones = diagnosticos.map((diagnostico)=>({
+            let _diagnosticos = [...diagnosticos];
+            if (data.query &&
+                (typeof data.query.vehiculo !== 'undefined' ||
+                    data.query.mecanico !== "undefined" ||
+                    data.query.historia !== "undefined" ||
+                    data.query.diagnostico !== "undefined"
+                )) {
+                const llavesQuery = Object.keys(data.query);
+                
+                for (const llave of llavesQuery) {
+                    _diagnosticos = _diagnosticos.filter((_diagnostico) => {
+                            
+                            let resultado = false;
+                            if (llave === 'diagnostico' || llave === 'historia') {
+                                const expresionRegular = new RegExp(data.query[llave], "ig");
+                                resultado = _diagnostico[llave].match(expresionRegular);
+                            }
+                            if (llave === 'mecanico' || llave ==='vehiculo') {
+                               resultado = _diagnostico[llave] == data.query[llave];
+                            } 
+                            return resultado;
+                        }
+                    );
+                }
+
+            }
+             _diagnosticos = _diagnosticos.map((diagnostico)=>({
                 ...diagnostico, 
                 vehiculo: {...vehiculos[diagnostico.vehiculo], id: diagnostico.vehiculo},
                 mecanico: {...mecanicos[diagnostico.mecanico], id: diagnostico.mecanico},
             }));
-            callback(200, diagnosticosConRelaciones);
+            callback(200, _diagnosticos);
         },
         POST: (data, callback) => {
             let nuevodiagnostico = data.payload;
