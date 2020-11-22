@@ -18,7 +18,7 @@ module.exports = function vehiculosHandler(vehiculos) {
                 for (const llave of llavesQuery) {
                     respuestaVehiculos = respuestaVehiculos.filter(
                         (_vehiculo) => {
-                            const expresionRegular = new RegExp(data.query[llave], 'ig');
+                            const expresionRegular = new RegExp(data.query[llave], "ig");
                             const resultado = [..._vehiculo[llave].matchAll(expresionRegular)];
                             return resultado.length > 0;
                         }

@@ -7,6 +7,25 @@ module.exports = function duenosHandler(duenos){
                 }
                     return callback(404,{ mensaje:`dueno con indice ${data.indice} no encontrado`});
             }
+            if (data.query &&
+                (typeof data.query.nombre !== 'undefined' ||
+                    data.query.apellido !== "undefined" ||
+                    data.query.pais !== "undefined" ||
+                    data.query.identificacion !== "undefined"
+                )) {
+                const llavesQuery = Object.keys(data.query);
+                let respuestaDuenos = [...duenos];
+                for (const llave of llavesQuery) {
+                    respuestaDuenos = respuestaDuenos.filter(
+                        (_dueno) => {
+                            const expresionRegular = new RegExp(data.query[llave], "ig");
+                            const resultado = [..._dueno[llave].matchAll(expresionRegular)];
+                            return resultado.length > 0;
+                        }
+                    );
+                }
+                return callback(200, respuestaDuenos);
+            }
             callback(200, duenos);
         },
         POST: (data, callback) => {

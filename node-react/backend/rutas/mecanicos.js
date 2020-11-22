@@ -1,11 +1,30 @@
 module.exports = function mecanicosHandler(mecanicos) {
     return {
         GET: (data, callback) => {
-            if (typeof data.indice !== "undefined") {
+            if (data.indice) {
                 if (mecanicos[data.indice]) {
                     return callback(200, mecanicos[data.indice]);
                 }
                 return callback(404, { mensaje: `mecanico con indice ${data.indice} no encontrado` });
+            } 
+            if (data.query &&
+                (typeof data.query.nombre !== 'undefined' ||
+                    data.query.apellido !== "undefined" ||
+                    data.query.pais !== "undefined" ||
+                    data.query.identificacion !== "undefined"
+                )) {
+                const llavesQuery = Object.keys(data.query);
+                let respuestaMecanicos = [...mecanicos];
+                for (const llave of llavesQuery) {
+                    respuestaMecanicos = respuestaMecanicos.filter(
+                        (_mecanico) => {
+                            const expresionRegular = new RegExp(data.query[llave], "ig");
+                            const resultado = [..._mecanico[llave].matchAll(expresionRegular)];
+                            return resultado.length > 0;
+                        }
+                    );
+                }
+                return callback(200, respuestaMecanicos);
             }
             callback(200, mecanicos);
         },
