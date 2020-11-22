@@ -2,57 +2,27 @@ import React, { Component } from "react";
 import ActionsMenu from "./componentes/ActionsMenu";
 import Table from "./componentes/Table";
 import Modal from "./componentes/Modal";
-import { CrearEditarEntidad, listarEntidad, eliminarEntidad } from "./servicio"
-import Select from "./componentes/Select";
-import Input from "./componentes/Input";
+import { CrearEditarEntidad, listarEntidad, eliminarEntidad, obtenerUno } from "./servicio"
+import ComponenteCampo from "./componentes/ComponenteCampo";
 
-const tiposvehiculo = [
-    { valor: "Sedan", etiqueta: "Sedan" }
-];
+const opcionesIniciales = {
+    tipovehiculo: [
+        { valor: "Sedan", etiqueta: "Sedan" },
+        { valor: "Hatchback", etiqueta: "Hatchback" }
+    ],
+    diagnostico: [
+        { valor: "Problema en el motor", etiqueta: "Problema en el motor" },
+        { valor: "Problema en la caja", etiqueta: " Problema en la caja" },
+        { valor: "Problema en el sistema electrico", etiqueta: "Problema en el sistema electrico" }
+    ],
+    tipopropietario: [
+        { valor: "Propio", etiqueta: "Propio" },
+        { valor: "Renting", etiqueta: "Renting" }
+    ],
+    vehiculo: [],
+    mecanico: [],
+    dueno: [],
 
-const ComponenteCampo = ({
-    manejarInput = () => { },
-    objeto = {},
-    columna = "",
-    nombreCampo = "",
-}) => {
-    switch (nombreCampo) {
-        case 'tipoidentificacion':
-        case 'mecanico':
-        case 'tipovehiculo':
-        case 'tipopropietario':
-        case 'identificacion':
-        case 'nombre':
-        case 'apellido':
-        case 'historia':
-        case 'diagnostico':
-        case 'vehiculo':
-        case 'pais':
-        case 'marca':
-        case 'linea':
-            return (
-                <div className="form-row">
-                    <Select
-                        nombreCampo={nombreCampo}
-                        options={tiposvehiculo}
-                        onChange={manejarInput}
-                        placeholder={nombreCampo}
-                        value={objeto[nombreCampo]}
-                    />
-                </div>);
-
-            return (
-                <Input
-                    nombreCampo={nombreCampo}
-                    tipo="text"
-                    onInput={manejarInput}
-                    placeholder={nombreCampo}
-                    value={objeto.[nombreCampo]}
-                />
-            );
-        default:
-            return false;
-    }
 };
 
 class Pagina extends Component {
@@ -65,12 +35,25 @@ class Pagina extends Component {
             objeto: {},
             idObjeto: null,
             method: "POST",
-            columnas: []
+            columnas: [],
+            options: opcionesIniciales,
         };
     }
 
-    cambiarModal = (_evento, method = "POST") => {
+    cambiarModal = (_evento, method = "POST",) => {
         this.setState({ mostrarModal: !this.state.mostrarModal, method })
+    }
+
+    cambiarModal = (_evento, method = "POST", newState = {}) => {
+        let _newState = {
+            ...newState,
+            mostrarModal: !this.state.mostrarModal,
+            method,
+        };
+        if (method ==="POST") {
+            _newState = {..._newState, idObjeto: null, objeto: {} };
+        }
+        this.obtenerOpcionesBackend(_newState);
     }
 
     listar = async () => {
@@ -96,18 +79,77 @@ class Pagina extends Component {
         this.setState({ objeto });
     }
 
-    crearEntidad = async () => {
+    crearEntidad = async (_evento = null) => {
         const { entidad } = this.props;
         let { objeto, method, idObjeto } = this.state;
         await CrearEditarEntidad({ entidad, objeto, method, idObjeto });
-        this.cambiarModal();
+        this.cambiarModal(_evento, "POST", {objeto: {}, idObjeto: null});
         this.listar();
     };
+    obtenerOpcionesBackend = async (newState) => {
+        const { options } = this.state;
 
+        const vehiculosPromise = listarEntidad({ entidad: "vehiculos" });
+        const mecanicosPromise = listarEntidad({ entidad: "mecanicos" });
+        const duenosPromise = listarEntidad({ entidad: "duenos" });
 
-    editarEntidad = (_evento, index) => {
-        const objeto = { ...this.state.entidades[index] };
-        this.setState({ objeto, idObjeto: index }, () => {
+        let [vehiculo, mecanico, dueno] = await Promise.all([
+            vehiculosPromise,
+            mecanicosPromise,
+            duenosPromise
+        ]);
+
+        vehiculo = vehiculo.map((_vehiculo, index) => ({
+            valor: index,
+            etiqueta: `${_vehiculo.marca} ${_vehiculo.linea}`
+        }));
+
+        mecanico = mecanico.map((_mecanico, index) => ({
+            valor: index,
+            etiqueta: `${_mecanico.nombre} ${_mecanico.apellido}`
+        }));
+
+        dueno = dueno.map((_dueno, index) => ({
+            valor: index,
+            etiqueta: `${_dueno.nombre} ${_dueno.apellido}`
+        }));
+
+        const nuevasOpciones = { ...options, vehiculo, mecanico, dueno };
+        this.setState({ ...newState, options: nuevasOpciones });
+
+    }
+
+    editarEntidad = async (_evento, index) => {
+        const { entidad } = this.props;
+        const { options } = this.state;
+
+        const objeto = await obtenerUno({ entidad, idObjeto: index });
+
+        const vehiculosPromise = listarEntidad({ entidad: "vehiculos" });
+        const mecanicosPromise = listarEntidad({ entidad: "mecanicos" });
+        const duenosPromise = listarEntidad({ entidad: "duenos" });
+        let [vehiculo, mecanico, dueno] = await Promise.all([
+            vehiculosPromise,
+            mecanicosPromise,
+            duenosPromise
+        ]);
+        vehiculo = vehiculo.map((_vehiculo, index) => ({
+            valor: index,
+            etiqueta: `${_vehiculo.marca} ${_vehiculo.linea}`
+        }));
+
+        mecanico = mecanico.map((_mecanico, index) => ({
+            valor: index,
+            etiqueta: `${_mecanico.nombre} ${_mecanico.apellido}`
+        }));
+
+        dueno = dueno.map((_dueno, index) => ({
+            valor: index,
+            etiqueta: `${_dueno.nombre} ${_dueno.apellido}`
+        }));
+
+        const nuevasOpciones = { ...options, vehiculo, mecanico, dueno };
+        this.setState({ objeto, idObjeto: index, options: nuevasOpciones }, () => {
             this.cambiarModal(null, "PUT");
         });
 
@@ -130,15 +172,15 @@ class Pagina extends Component {
 
     //este metodo siempre debe ir de ultimo
     render() {
-        const { titulo = "Pagina sin titulo" } = this.props;
-        const { columnas } = this.state;
+        const { titulo = "Pagina sin titulo", entidad } = this.props;
+        const { columnas, idObjeto, entidades, objeto, options } = this.state;
         return (
             <>
                 <ActionsMenu
                     cambiarModal={this.cambiarModal}
                     titulo={titulo} />
                 <Table
-                    entidades={this.state.entidades}
+                    entidades={entidades}
                     editarEntidad={this.editarEntidad}
                     eliminarEntidad={this.eliminarEntidad}
                     columnas={columnas}
@@ -149,14 +191,17 @@ class Pagina extends Component {
                         cambiarModal={this.cambiarModal}
                         manejarInput={this.manejarInput}
                         crearEntidad={this.crearEntidad}
-                        objeto={this.state.objeto}
+                        //objeto={this.state.objeto}
+                        entidad={entidad}
+                        idObjeto={idObjeto}
                     >
                         {columnas.map((columna, index) => (
                             <ComponenteCampo
                                 key={index}
                                 manejarInput={this.manejarInput}
-                                objeto={this.state.objeto}
+                                objeto={objeto}
                                 nombreCampo={columna}
+                                options={options}
                             />
                         ))}
                     </Modal>

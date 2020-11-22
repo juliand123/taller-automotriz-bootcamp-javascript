@@ -1,33 +1,13 @@
 import React from "react";
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter"
-import Select from "../Select";
-import Input from "../Input";
 import "./Modal.css";
-
-const tiposVehiculo = [
-    { valor: "Tipo Vehículo", etiqueta: "Tipo Vehículo" },
-    { valor: "Sedan", etiqueta: "Sedan" },
-    { valor: "Automovil", etiqueta: "Automovil" },
-    { valor: "Camioneta", etiqueta: "Camioneta" },
-    { valor: "Crosover", etiqueta: "Crosover" },
-    { valor: "Camion", etiqueta: "Camion" },
-    { valor: "Otro", etiqueta: "Otro" },
-];
-
-const tiposDuenos = [
-    { valor: "Propio", etiqueta: "Propio" },
-    { valor: "Renting", etiqueta: "Renting" },
-    { valor: "Leasing", etiqueta: "Leasing" },
-    { valor: "Otro", etiqueta: "Otro" },
-];
+import { obtenerUno } from "../../servicio";
 
 function Modal({
     cambiarModal = () => { },
-    manejarInput = () => { },
     crearEntidad = () => { },
-    objeto = () => { },
-    children = []
+    children = [],
 }) {
     return (
         <>
@@ -42,7 +22,9 @@ function Modal({
                                 </div>
                             </form>
                         </div>
-                        <ModalFooter cambiarModal={cambiarModal} crearEntidad={crearEntidad} />
+                        <ModalFooter
+                            cambiarModal={cambiarModal}
+                            crearEntidad={crearEntidad} />
                     </div>
                 </div>
             </div>
@@ -50,4 +32,5 @@ function Modal({
         </>
     );
 }
+
 export default Modal;

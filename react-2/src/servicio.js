@@ -1,4 +1,5 @@
-const API_URL = "https://taller-automotriz-backend.vercel.app"
+//const API_URL = "https://taller-automotriz-backend.vercel.app"
+const API_URL = "http://localhost:5000"
 
 export const listarEntidad = async ({ entidad = "vehiculos" }) => {
     try {
@@ -9,6 +10,20 @@ export const listarEntidad = async ({ entidad = "vehiculos" }) => {
         console.log(error);
     }
 };
+
+export const obtenerUno= async ({ entidad = "vehiculos", idObjeto = null }) => {
+    if (idObjeto === null || !entidad ) {
+            return{};
+    }
+    try {
+        const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`);
+        const datos = await respuesta.json();
+        return datos;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 
 export const CrearEditarEntidad = async ({
