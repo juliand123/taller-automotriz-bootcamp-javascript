@@ -1,9 +1,33 @@
 import React, { Component } from "react";
+import { trackPromise, usePromiseTracker } from "react-promise-tracker";
 import ActionsMenu from "./componentes/ActionsMenu";
 import Table from "./componentes/Table";
 import Modal from "./componentes/Modal";
 import { CrearEditarEntidad, listarEntidad, eliminarEntidad, obtenerUno } from "./servicio"
 import ComponenteCampo from "./componentes/ComponenteCampo";
+
+import Loader from 'react-loader-spinner';
+
+
+
+const LoadingIndicator = props => {
+    const { promiseInProgress } = usePromiseTracker();
+  
+    return promiseInProgress && 
+      <div
+        style={{
+          width: "70%",
+          height: "100",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Loader type="ThreeDots" color="#007bff" height="40" width="40" />
+      </div>
+
+    };
+
 
 const opcionesIniciales = {
     tipovehiculo: [
@@ -64,7 +88,7 @@ class Pagina extends Component {
     listar = async () => {
         try {
             const { entidad } = this.props;
-            const entidades = await listarEntidad({ entidad });
+            const entidades = await trackPromise(listarEntidad({ entidad }));
             let columnas = [];
             if (Array.isArray(entidades) && entidades.length > 0) {
                 columnas = Object.keys(entidades[0] || []);
@@ -184,6 +208,10 @@ class Pagina extends Component {
                 <ActionsMenu
                     cambiarModal={this.cambiarModal}
                     titulo={titulo} />
+
+<LoadingIndicator/>
+
+
                 <Table
                     entidades={entidades}
                     editarEntidad={this.editarEntidad}

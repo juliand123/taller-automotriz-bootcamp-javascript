@@ -52,11 +52,10 @@
     margin-bottom: 0;
     list-style: none;
 }
-.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
-    color: #fff;
-}
+
 .navbar-dark .navbar-nav .nav-link {
     color: rgba(255,255,255,.5);
+    font-size: initial;
 }
 
 .nav-link {

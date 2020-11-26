@@ -8,7 +8,7 @@ function Header(props) {
             <tr>
                 <th scope="col">#</th>
                 {props.columnas.map((columna) => (
-                 <th scope="col">{columna}</th>
+                 <th scope="col">{(columna).toUpperCase()}</th>
                 ))}
                 <th scope="col"></th>
             </tr>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { eliminarEntidad } from "../../servicio";
 import Header from "./Header";
 import Row from "./Row";
 import "./Table.css"
+
 
 function Table( {entidades = [], 
     editarEntidad=() => {},

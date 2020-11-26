@@ -1,5 +1,5 @@
-const API_URL = "https://taller-automotriz-backend-react.vercel.app"
-//const API_URL = "http://localhost:5000"
+//const API_URL = "https://taller-automotriz-backend-react.vercel.app"
+const API_URL = "http://localhost:5000"
 
 export const listarEntidad = async ({ entidad = "vehiculos" }) => {
     try {
@@ -73,6 +73,4 @@ export const eliminarEntidad = async ({
         console.log(error);
     }
 };
-
-
 
