@@ -16,7 +16,7 @@ module.exports = {
     duenos: [
         { tipoidentificacion: 'Cedula', identificacion: '123456', nombre: 'Laga', apellido: 'Rapata', pais: 'Colombia' },
         { tipoidentificacion: 'Cedula', identificacion: '85479', nombre: 'Chepe', apellido: 'Arias', pais: 'Colombia' },
-        { tipoidentificacion: 'Cedula', identificacion: '133', nombre: 'Beni', apellido: 'Rascamelas', pais: 'Colombia' }
+        { tipoidentificacion: 'Cedula', identificacion: '133', nombre: 'Beni', apellido: 'Rasca', pais: 'Colombia' }
     ],
     diagnosticos: [
         {
@@ -24,16 +24,16 @@ module.exports = {
         mecanico: '0',
         fechaCreacion: new Date(),
         fechaEdicion: null,
-        historia: "",
-        diagnostico: "diagnostico"
+        historia: "Problema al acelerar",
+        diagnostico: "Problema en el motor"
     },
     {
         vehiculo: '1',
         mecanico: '1',
         fechaCreacion: new Date(),
         fechaEdicion: null,
-        historia: "",
-        diagnostico: "diagnostico"
+        historia: "Ruido andando",
+        diagnostico: "Problema en la caja"
     }
 
 ],

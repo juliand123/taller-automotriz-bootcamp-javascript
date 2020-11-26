@@ -8,7 +8,8 @@ import ComponenteCampo from "./componentes/ComponenteCampo";
 const opcionesIniciales = {
     tipovehiculo: [
         { valor: "Sedan", etiqueta: "Sedan" },
-        { valor: "Hatchback", etiqueta: "Hatchback" }
+        { valor: "Hatchback", etiqueta: "Hatchback" },
+        { valor: "Camioneta", etiqueta: "Camioneta" }
     ],
     diagnostico: [
         { valor: "Problema en el motor", etiqueta: "Problema en el motor" },
@@ -18,6 +19,10 @@ const opcionesIniciales = {
     tipopropietario: [
         { valor: "Propio", etiqueta: "Propio" },
         { valor: "Renting", etiqueta: "Renting" }
+    ],
+    tipoidentificacion: [
+        { valor: "Cedula", etiqueta: "Cedula" },
+        { valor: "CedulaExtranjeria", etiqueta: "Cedula Extranjeria" }
     ],
     vehiculo: [],
     mecanico: [],
